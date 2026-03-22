@@ -206,6 +206,9 @@ class SWTForward(nn.Module):
         for j in range(self.J):
             # Do 1 level of the transform
             y = lowlevel.afb2d_atrous(ll, filts, self.mode, 2**j)
+            # afb2d_atrous returns [B, 4C, H, W]; reshape to [B, C, 4, H, W]
+            B, C4, H, W = y.shape
+            y = y.reshape(B, -1, 4, H, W)
             coeffs.append(y)
             ll = y[:,:,0]
 

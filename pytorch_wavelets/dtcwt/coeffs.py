@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 
 from numpy import load
-from pkg_resources import resource_stream
+from importlib.resources import open_binary as resource_stream
 try:
     import pywt
     _HAVE_PYWT = True
